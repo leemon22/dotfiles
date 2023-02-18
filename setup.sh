@@ -13,7 +13,7 @@ if( ! test -d $backupdir ); then
 	mkdir $backupdir
 fi
 
-dirstructure=$(find . -type d)
+dirstructure=$(find . -type d | sed '/.git/d')
 for dir in $dirstructure; do
 
 	if $( ! test -d $backupdir/$dir ); then
@@ -28,7 +28,7 @@ done
 
 # Copy files & saves previous config
 
-files=$(find . -type f )
+files=$(find . -type f | sed '/.git/d')
 for file in $files; do
 
 	if $( test -f ~/$file ); then
